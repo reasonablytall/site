@@ -5,8 +5,8 @@ out vec4 outColor;
 uniform vec3 iResolution;
 uniform float iTime;
 uniform vec4 iMouse;
-uniform vec3 iBackground; // page background color, from CSS
-uniform vec3 iForeground; // page text color, from CSS
+uniform vec3 iBackground;
+uniform vec3 iForeground;
 
 // Begin imports ---------------------------------------------------------------
 

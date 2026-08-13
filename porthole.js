@@ -39,13 +39,13 @@ void main() {
   const iBackground = gl.getUniformLocation(program, 'iBackground');
   const iForeground = gl.getUniformLocation(program, 'iForeground');
 
-  const BACKGROUND_RGB = [244, 246, 239]; // light, matches body background
-  const FOREGROUND_RGB = [138, 153, 102]; // same hue, sage green
+  const BACKGROUND_RGB = [244, 246, 239];
+  const FOREGROUND_RGB = [138, 153, 102];
 
   gl.uniform3fv(iBackground, BACKGROUND_RGB.map((c) => c / 255));
   gl.uniform3fv(iForeground, FOREGROUND_RGB.map((c) => c / 255));
 
-  const PIXEL_SIZE = 2; // CSS px per rendered shader pixel — raise for chunkier blocks
+  const PIXEL_SIZE = 2;
 
   const mouse = [0, 0, 0, 0];
   canvas.addEventListener('mousemove', (e) => {
