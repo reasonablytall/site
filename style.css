@@ -4,10 +4,10 @@ body {
   align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 15vh;
+  padding-top: 5rem;
   font-family: "Ysabeau", sans-serif;
   font-size: 18px;
-  background: hsl(76 27 95);
+  background: hsl(77 28 95);
   color: hsl(76 15 15);
   box-sizing: border-box;
 }
@@ -17,6 +17,16 @@ main {
   max-width: 600px;
   padding: 0 1.5rem;
   box-sizing: border-box;
+}
+
+#porthole-canvas {
+  display: block;
+  width: 100%;
+  height: 160px;
+  margin-bottom: 1.5rem;
+  /* border-radius: 4px; */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .site-header {
