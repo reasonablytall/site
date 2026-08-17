@@ -7,6 +7,7 @@ uniform float iTime;
 uniform vec4 iMouse;
 uniform vec3 iBackground;
 uniform vec3 iForeground;
+uniform sampler2D iDither;
 
 // Begin imports ---------------------------------------------------------------
 
@@ -113,14 +114,28 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   n = n * 0.5 + 0.5;
   n *= n;
 
+  // // testing: force a gradient pattern
+  // uv = fragCoord / iResolution.xy;
+  // n = (uv.x + uv.y) / 2.0;
+
   // dithering-ish
+  float l = 0.0;
+  l = max(l, step(0.3,n) * 1.0);
+  l = max(l, step(0.35,n) * 2.0);
+  l = max(l, step(0.4,n) * 3.0);
+  l = max(l, step(0.5,n) * 4.0);
+  l = max(l, step(0.65,n) * 5.0);
+  l = max(l, step(0.7,n) * 6.0);
+  l = max(l, step(0.8,n) * 7.0);
+
   vec2 xy = fragCoord.xy - vec2(0.5);
-  float res = 0.0;
-  res = max(res, step(0.85,n) * 1.0);
-  res = max(res, step(0.55,n) * float(fract(xy/1.0)==vec2(0.0) && mod(xy.x/1.0,2.0)==mod(xy.y/1.0,2.0)));
-  res = max(res, step(0.4,n) * float(mod(xy.x,2.0)==0.0 && mod(xy.y,2.0)==0.0));
-  res = max(res, step(0.3,n) * float(fract(xy/2.0)==vec2(0.0) && mod(xy.x/2.0,2.0)==mod(xy.y/2.0,2.0)));
-  
+  xy = vec2(mod(xy.x, 4.0), l*5.0+mod(xy.y, 4.0));
+  float res = texelFetch(
+    iDither,
+    ivec2(xy), 0
+  ).x;
+
+  // mix the final color based on the result
   vec3 col = mix(iBackground, iForeground, res);
   fragColor = vec4(col, 1.0);
 }
